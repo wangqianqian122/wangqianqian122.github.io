@@ -1,0 +1,128 @@
+[meta title:"Final" description:"Short description of your project" /]
+
+[Header
+  fullWidth:true
+  title:"The Decline of PC Games"
+  subtitle:"Welcome to Game World!!!"
+  author:"WangQianqian"
+  authorLink:"https://idyll-lang.org"
+  date:"May 10, 2021"
+  background:"#333333"
+  color:"#rrrrrr"
+   /]
+
+[var name:"x" value:0 /]
+
+## Introduction
+Steam is an integrated PC game download platform. In 2002, the Steam system came out with the CS1.4 Beta. So far, Steam has been a very successful and widespread operation. The platform allows players to buy, download, discuss, upload and share games and softwares.
+
+[FullWidth]
+[img
+src:"https://i.loli.net/2021/05/10/vNhMaqjFu8ZEpbz.png"
+style:`{height:300, padding: '10px'}`
+/]
+[/Float]
+
+
+
+
+## Steam Game Sales
+The dataset is about steam games sales in different areas. 
+The form below shows the total sales of steam games between 1996 to 2020. The end and start of year can be choosen by sliders. The data between 1980 to 1985 is too little, so it is better to ignore this period.  The games of steam belongs to PC games. The sales of those games increase fastly before 2010. After 2010, the total sales began to decrease. 
+
+
+[data name:"steamgame" source:"steamgame.csv" /]
+[Table data:steamgame /]
+
+
+##Steam Game Global Sales
+
+ [var name:"yearStart" value:1985 /]
+ [var name:"yearEnd" value:2020 /]
+
+[IdyllVegaLite data:steamgame spec:`{
+  width: 500,
+  height: 300,
+  mark:"line",
+  transform:[{filter:{ field:"Year_of_Release", "lte":yearEnd}},
+           {filter:{field:"Year_of_Release", "gte":yearStart}}],
+   
+  encoding: {
+    x: {field: "Year_of_Release", type: "nominal", axis:{title:"Year"},
+       	scale: {
+        type: "linear",
+        zero: true}},
+    y: {field: "Global_Sales", type: "quantitative",axis:{title:"Sales"}},
+  }
+}` /]
+
+[section]
+Lowest Year: 1985 [Range min:1985 max:yearEnd value:yearStart /] 2020
+
+Highest Year: 1985 [Range min:yearStart max:2020 value:yearEnd /] 2020
+[/section]
+
+
+##The data about publishing games in steam
+The second form shows the number of publishing games in steam platform. It is funny that the trend of this form is as similar as the first form. The sales decrease, and the new games decrease as well.
+
+[data name:"publishing" source:"publishgame.csv" /]
+
+[IdyllVegaLite data:publishing spec:`{
+  width: 500,
+  height: 300,
+  mark:"bar",
+  encoding: {
+    x: {field: "Year_of_Release", type: "nominal", axis:{title:"Year"},
+       	scale: {
+        type: "linear",
+        zero: true}},
+    y: {field: "Name", type: "quantitative",axis:{title:"The number of pubishing games"}},
+  }
+}` /]
+
+
+
+##The Rise of Mobile Games!
+PCs became the smellest Gaming Platform in 2018. The form shows the data from Gaming Platform Dataset. In 2015, the revenue of mobile phone games is as same as PC games. Then the revenue of mobile phone games sustainly grow, but the revenue of Console games and PC games has no significant change. Until 2021, the revenue of PC games even became the lowest one.
+
+[FullWidth]
+[img
+src:"https://i.loli.net/2021/05/11/h8TlkYoPtxSimKJ.png"
+style:`{height:400, padding: '10px'}`
+/]
+[/Float]
+
+
+
+
+##Reference
+1.https://data.world/makeovermonday/2019w35
+
+2.https://www.statista.com/chart/13789/worldwide-video-game-revenue-forecast/
+
+3.https://data.world/mhoangvslev/steam-games-dataset/workspace/file?filename=vgsales.csv
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
